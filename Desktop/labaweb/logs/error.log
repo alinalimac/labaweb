@@ -1,0 +1,5 @@
+2024/11/12 22:40:22 [emerg] 1#1: upstream "website" may not have port 8002 in /etc/nginx/nginx.conf:25
+2024/11/12 22:41:13 [emerg] 1#1: upstream "website" may not have port 8002 in /etc/nginx/nginx.conf:25
+2024/11/12 22:42:41 [emerg] 1#1: upstream "website" may not have port 8002 in /etc/nginx/nginx.conf:25
+2024/11/12 22:59:27 [emerg] 1#1: host not found in upstream "website:8002" in /etc/nginx/nginx.conf:18
+2024/11/16 20:20:58 [error] 22#22: *1 connect() failed (113: Host is unreachable) while connecting to upstream, client: 192.168.65.1, server: , request: "GET / HTTP/1.1", upstream: "http://172.19.0.4:8002/", host: "localhost:8080"

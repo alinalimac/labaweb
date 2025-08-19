@@ -1,0 +1,48 @@
+services:
+  chat:
+    build: ./chat
+    container_name: chat
+    ports:
+      - "8001:8001"
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@postgres_db:5432/webchat
+    depends_on:
+      - db
+
+  website:
+    build: ./website
+    container_name: website
+    ports:
+      - "8002:8002"
+    volumes:
+      - ./website/static:/app/static
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@postgres_db:5432/webchat
+    depends_on:
+      - db
+
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    ports:
+      - "8080:80"
+    depends_on:
+      - chat
+      - website
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./logs:/var/log/nginx
+
+  db:
+    image: postgres:14
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: limac
+      POSTGRES_PASSWORD: limac
+      POSTGRES_DB: webchat
+    volumes:
+      - ./dump:/var/lib/postgresql/data
+    ports:
+      - "5434:5432"
+    restart: always
+

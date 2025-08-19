@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Chat Room: {{ room_name }}</h2>
+
+<div id="messages" style="border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: scroll;"></div>
+
+<form id="message-form" autocomplete="off">
+    <input type="text" id="message-input" placeholder="Type a message" required>
+    <button type="submit">Send</button>
+</form>
+
+<script>
+    // Функция для получения токена из cookie
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    const token = getCookie("access_token"); 
+    const roomId = "{{ chat_room_id }}";
+    
+    
+    if (token) {
+        // Подключение к WebSocket с токеном
+        const socket = new WebSocket(`ws://localhost:8001/ws/${roomId}?token=${token}`);
+
+        // Получение сообщений от сервера
+        socket.onmessage = function(event) {
+            const messageContainer = document.getElementById("messages");
+            const message = document.createElement("div");
+            message.textContent = event.data;
+            messageContainer.appendChild(message);
+            messageContainer.scrollTop = messageContainer.scrollHeight;  // Автопрокрутка вниз
+        };
+
+        // Отправка сообщения при отправке формы
+        document.getElementById("message-form").onsubmit = function(event) {
+            event.preventDefault();
+            const messageInput = document.getElementById("message-input");
+            if (socket.readyState === WebSocket.OPEN) {
+                socket.send(messageInput.value);
+                messageInput.value = "";
+            } else {
+                alert("WebSocket connection is not open.");
+            }
+        };
+
+        socket.onopen = function() {
+            console.log("WebSocket connection opened");
+        };
+
+        // Обработка закрытия WebSocket
+        socket.onclose = function(event) {
+            console.log("WebSocket connection closed:", event);
+            const messageContainer = document.getElementById("messages");
+            const message = document.createElement("div");
+            message.textContent = "Connection closed. Try to re-login.";
+            message.style.color = "red";
+            messageContainer.appendChild(message);
+        };
+
+        socket.onerror = function(error) {
+            console.error("WebSocket error:", error);
+        };
+    } else {
+        alert("Authentication token not found. Please log in.");
+    }
+</script>
+{% endblock %}
+

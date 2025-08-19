@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat App</title>
+    <link rel="stylesheet" href="/static/style.css?v=1.1">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Chat Application</h1>
+            <nav>
+                <ul>
+                    {% if user %}
+                        <li><a href="/chat_rooms">Chat Rooms</a></li>
+
+                    {% else %}
+                        <li><a href="/login">Login</a></li>
+                        <li><a href="/register">Register</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Chat Application</p>
+        </footer>
+    </div>
+</body>
+</html>

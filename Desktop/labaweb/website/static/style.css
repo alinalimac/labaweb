@@ -1,0 +1,144 @@
+/* Общие стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #490db6;
+}
+
+/* Контейнер */
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+/* Шапка */
+header {
+    background-color: #490db6;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    border-radius: 10px 10px 0 0; /* Скругленные углы на шапке */
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Основной контент */
+main {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px; /* Скругленные углы для основного блока */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Легкая тень */
+}
+
+h1 {
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+h2, h3 {
+    color: #490db6;
+    margin-bottom: 20px;
+}
+
+/* Формы */
+form {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+input[type="text"], input[type="email"], input[type="password"] {
+    padding: 12px;
+    margin-top: 5px;
+    font-size: 16px;
+    border-radius: 5px; /* Скругленные углы для полей ввода */
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    transition: border 0.3s;
+}
+
+input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus {
+    border-color: #666; /* Изменение цвета рамки при фокусе */
+}
+
+button {
+    background-color: #490db6;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px; /* Скругленные углы для кнопок */
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #6b3ebe;
+}
+
+/* Списки */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 12px;
+}
+
+/* Подвал */
+footer {
+    text-align: center;
+    margin-top: 50px;
+    padding: 12px;
+    background-color: #490db6;
+    color: white;
+    border-radius: 0 0 10px 10px; /* Скругленные углы подвала */
+}
+
+/* Сообщения */
+#messages {
+    max-height: 300px;
+    overflow-y: scroll;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f7f7f7;
+    border-radius: 10px; /* Скругленные углы для блока сообщений */
+}
+
+#messages div {
+    padding: 8px;
+    background-color: #e0e0e0;
+    margin-bottom: 8px;
+    border-radius: 5px; /* Скругленные углы для сообщений */
+}
